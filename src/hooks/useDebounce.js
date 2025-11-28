@@ -1,29 +1,29 @@
 // src/hooks/useDebounce.js
-import { useState, useEffect } from 'react';
-import { debounce } from 'lodash-es';
+
+import { useState, useEffect } from "react";
 
 /**
- * Custom hook to debounce a value update.
- * @param {*} value - The value to debounce.
- * @param {number} delay - The debounce delay in milliseconds.
- * @returns {*} The debounced value.
+ * Debounce a changing value.
+ *
+ * @param {*} value - The input value that changes frequently (search term, filter, etc.)
+ * @param {number} delay - Delay in ms before updating the debounced value
+ * @returns {*} debouncedValue - The value after the specified delay
  */
-export const useDebounce = (value, delay) => {
+export function useDebounce(value, delay = 300) {
+  // State to hold the debounced value
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
-    // Create a debounced function instance
-    const handler = debounce(() => {
+    // Set a timer that will update the debounced value
+    const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
 
-    handler();
-
-    // Cleanup function
+    // Cleanup function: runs before next effect
     return () => {
-      handler.cancel(); // Cancel the timer if value changes before delay
+      clearTimeout(handler);
     };
-  }, [value, delay]);
+  }, [value, delay]); // Re-run effect when value or delay changes
 
   return debouncedValue;
-};
+}

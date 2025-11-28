@@ -4,11 +4,14 @@
   "private": true,
   "type": "module",
 
+  "homepage": "https://ultra-owl.github.io/customer-crm-table",
+
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "deploy": "gh-pages -d dist"
   },
 
   "dependencies": {
@@ -18,6 +21,8 @@
 
   "devDependencies": {
     "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "gh-pages": "^6.0.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.0",
